@@ -12,7 +12,7 @@ jobs:
       - name: Install ruff (python)
         uses: astral-sh/ruff-action@v3
       - name: Lint using ruff (python)
-        run: ruff check --fix
+        run: ruff check
       - name: Format using ruff (python)
         run: ruff format
 
