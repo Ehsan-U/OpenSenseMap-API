@@ -8,15 +8,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - uses: astral-sh/ruff-action@v3
-      - run: ruff check
-      - run: ruff format
+
+      - name: Install ruff (python)
+        uses: astral-sh/ruff-action@v3
+      - name: Lint using ruff (python)
+        run: ruff check --fix
+      - name: Format using ruff (python)
+        run: ruff format
+
+      - name: Lint using hadolint (docker)
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
+
       - name: Install dependencies
         run: pip3 install -r requirements.txt
+
       - name: Run tests
         run: pytest tests.py -v
 
