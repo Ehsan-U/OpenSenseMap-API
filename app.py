@@ -7,6 +7,7 @@ from dependencies import get_client
 app = FastAPI()
 
 
+# TODO: add version endpoint
 @app.get("/version")
 async def get_version():
     return {"version": "0.0.1"}
