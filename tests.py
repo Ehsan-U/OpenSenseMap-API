@@ -1,4 +1,4 @@
-# write tests for the app
+# write unit tests for the app
 from fastapi.testclient import TestClient
 from app import app
 

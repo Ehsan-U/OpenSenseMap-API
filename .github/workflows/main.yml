@@ -27,10 +27,24 @@ jobs:
           python-version: 3.12
 
       - name: Install dependencies
-        run: pip3 install -r requirements.txt
+        run: pip3 install --no-cache-dir -r requirements.txt
 
       - name: Run tests
         run: pytest tests.py -v
 
+      - name: OpenSSF Scorecard
+        uses: ossf/scorecard-action@v2.3.1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          results-file: scorecard.sarif
+          results-format: sarif
+
+      - name: Upload scorecard results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: scorecard.sarif
+
       - name: Build docker image
         run: docker build -t ehsanu/opensensemap-api:v0.0.1 .
+
+      
