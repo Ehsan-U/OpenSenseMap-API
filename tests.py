@@ -9,4 +9,4 @@ client = TestClient(app)
 def test_get_version():
     response = client.get("/version")
     assert response.status_code == 200
-    assert response.json() == {"version": "0.0.1"}
+    assert response.json() == {"version": "0.0.2"}
