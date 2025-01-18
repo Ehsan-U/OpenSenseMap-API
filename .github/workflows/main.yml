@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
-      id-token: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -34,23 +33,6 @@ jobs:
 
       - name: Run tests
         run: pytest tests.py -v
-
-      - name: OpenSSF Scorecard
-        uses: ossf/scorecard-action@v2.4.0
-        with:
-          results-file: results.sarif
-          results-format: sarif
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.6.0
-        with:
-          path: results.sarif
-          retention-days: 5
-
-      - name: upload to code scanning
-        uses: github/codeql-action/upload-sarif@v3.28.1
-        with:
-          sarif_file: results.sarif
 
       - name: Build docker image
         run: docker build -t ehsanu/opensensemap-api:v0.0.1 .
