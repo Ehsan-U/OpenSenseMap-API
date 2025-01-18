@@ -36,13 +36,13 @@ jobs:
         uses: ossf/scorecard-action@v2.3.1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          results-file: scorecard.sarif
+          results-file: /github/workspace/results.sarif
           results-format: sarif
 
       - name: Upload scorecard results
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: scorecard.sarif
+          sarif_file: /github/workspace/results.sarif
 
       - name: Build docker image
         run: docker build -t ehsanu/opensensemap-api:v0.0.1 .
