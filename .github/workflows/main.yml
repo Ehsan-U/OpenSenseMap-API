@@ -32,7 +32,7 @@ jobs:
         run: pip3 install --no-cache-dir -r requirements.txt
 
       - name: Run tests
-        run: pytest tests.py -v
+        run: pytest tests/test_unit.py -v
 
       - name: Build docker image
         run: docker build -t ehsanu/opensensemap-api:v0.0.1 .
